@@ -1,0 +1,39 @@
+package swap;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+public class week12 {
+public static void main(String[] args) throws InterruptedException, AWTException {
+	WebDriver driver= new ChromeDriver();
+	driver.get("https://smallpdf.com/word-to-pdf");
+	Thread.sleep(2000);
+	WebElement chooseFileBtn = driver.findElement(By.xpath("//*[@id=\"app\"]/div/div[1]/header/div[2]/div/div/label/form/label/div/div[2]/div[2]/button[1]/span"));
+	chooseFileBtn.click();
+	Thread.sleep(2000);
+	Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+	StringSelection str = new StringSelection("Downloads\\Selenium ATT Programms (12) (1)");
+	clipboard.setContents(str,null);
+	Thread.sleep(2000);
+	Robot robot = new Robot();
+	robot.keyPress(KeyEvent.VK_CONTROL);
+	robot.keyPress(KeyEvent.VK_V);
+	robot.keyPress(KeyEvent.VK_ENTER);
+	Thread.sleep(500);
+	WebElement convertToWord = driver.findElement(By.xpath("(//div[@class='sc-8s01yt-4 dNifye'])[1]"));
+	convertToWord.click();
+	WebElement choosePlan =
+			driver.findElement(By.xpath("(//span[@class='r5zwp6-3 iiSRjo'])[3]"));
+	choosePlan.click();
+	Thread.sleep(50000);
+	WebElement download = driver.findElement(By.xpath("/html/body/div[1]/div/div/div[3]/div[2]/div[2]/div/div/div[2]/div/div[2]/div[2]/div[1]/div/button[1]/div/span"));
+	download.click();
+	}
+}
